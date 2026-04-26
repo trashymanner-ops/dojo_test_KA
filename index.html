@@ -1,1 +1,584 @@
-<!DOCTYPE html> <html lang="pl">   <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Tytuł strony</title> </head>   <body> <h1>Moja pierwsza strona www</h1> <p>Tu idzie treść naszej strony.</p> <p>Tu idzie dalsza treść naszej strony.</p> </body>   </html>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="10 najnowszych porad z zakresu pielęgnacji skóry — odkryj sekrety zdrowej, promiennej cery">
+  <meta property="og:title" content="LUMIÈRE — Porady Beauty">
+  <meta property="og:description" content="10 najnowszych porad z zakresu pielęgnacji skóry">
+  <title>LUMIÈRE — Porady Beauty</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #FAF6F0;
+      --sand: #E8DDD0;
+      --terra: #C4856A;
+      --rose: #D4A5A0;
+      --bark: #8B6355;
+      --ink: #2A1F1A;
+      --muted: #9B8880;
+      --white: #FFFFFF;
+      --gold: #C9A96E;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      background: var(--ink);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: var(--sand);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 90vh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(0.7);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(42,31,26,0.85) 0%, rgba(42,31,26,0.1) 50%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 4rem 5rem;
+      max-width: 760px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose);
+    }
+
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--sand);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ─── SECTION INTRO ─── */
+    .section-intro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5rem 4rem 3rem;
+      gap: 3rem;
+    }
+
+    .section-intro-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-intro-text p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 500px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--terra), transparent);
+      min-width: 60px;
+    }
+
+    /* ─── TIPS GRID ─── */
+    .tips-grid {
+      padding: 2rem 4rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2.5rem;
+    }
+
+    /* Featured tip spans 2 cols */
+    .tip-card.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .tip-card {
+      background: var(--white);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .tip-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(42,31,26,0.12);
+    }
+
+    .tip-card:nth-child(1) { animation-delay: 0.05s; }
+    .tip-card:nth-child(2) { animation-delay: 0.1s; }
+    .tip-card:nth-child(3) { animation-delay: 0.15s; }
+    .tip-card:nth-child(4) { animation-delay: 0.2s; }
+    .tip-card:nth-child(5) { animation-delay: 0.25s; }
+
+    .tip-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .tip-card:hover .tip-image { transform: scale(1.04); }
+
+    .tip-card.featured .tip-image { height: 100%; min-height: 380px; }
+
+    .tip-body {
+      padding: 2rem 1.8rem 2rem;
+    }
+
+    .tip-card.featured .tip-body {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tip-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--sand);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .tip-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terra);
+      background: rgba(196,133,106,0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .tip-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      line-height: 1.3;
+      margin-bottom: 0.9rem;
+      color: var(--ink);
+    }
+
+    .tip-card.featured .tip-title { font-size: 1.9rem; }
+
+    .tip-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .tip-card.featured .tip-text { font-size: 1rem; }
+
+    .tip-highlight {
+      margin-top: 1.2rem;
+      padding: 0.9rem 1.2rem;
+      border-left: 3px solid var(--terra);
+      background: rgba(196,133,106,0.06);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--bark);
+      line-height: 1.6;
+    }
+
+    /* ─── QUOTE BREAK ─── */
+    .quote-break {
+      background: var(--ink);
+      padding: 6rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-break::before {
+      content: '"';
+      position: absolute;
+      font-family: 'Playfair Display', serif;
+      font-size: 30rem;
+      color: rgba(201,169,110,0.06);
+      top: -5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-break blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      color: var(--white);
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      font-style: italic;
+    }
+
+    .quote-break cite {
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .logo { font-size: 1.2rem; }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .tip-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .tip-card.featured .tip-image { height: 260px; min-height: unset; }
+      .section-intro { padding: 3rem 2rem 2rem; flex-direction: column; gap: 1.5rem; }
+      .tips-grid { padding: 1rem 2rem 4rem; }
+      .hero-content { padding: 2rem 2rem 3rem; }
+      footer { padding: 2rem; }
+      .quote-break { padding: 4rem 2rem; }
+      nav ul { display: none; }
+    }
+
+    @media (max-width: 500px) {
+      .tips-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="#" class="logo">LUMIÈRE</a>
+    <nav>
+      <ul>
+        <li><a href="#porady">Porady</a></li>
+        <li><a href="#cytaty">Inspiracje</a></li>
+        <li><a href="#">O nas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img
+      src="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=1600&auto=format&fit=crop&q=80"
+      alt="Kobieta z piękną skórą — hero"
+      class="hero-img"
+      loading="eager"
+    >
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Pielęgnacja skóry · 2025</p>
+      <h1 class="hero-title">Twoja skóra<br>zasługuje na <em>najlepsze</em></h1>
+      <p class="hero-desc">10 porad od ekspertów dermatologii i beauty, które odmienią Twoją codzienną rutynę pielęgnacyjną.</p>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <div class="section-intro" id="porady">
+    <div class="section-intro-text">
+      <h2>Najnowsze porady beauty</h2>
+      <p>Pielęgnacja skóry to nie tylko kosmetyki — to rytuał, nauka i miłość do siebie. Oto 10 wskazówek, które naprawdę działają.</p>
+    </div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- TIPS GRID -->
+  <main class="tips-grid">
+
+    <!-- TIP 1 – FEATURED -->
+    <article class="tip-card featured">
+      <img
+        src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&auto=format&fit=crop&q=80"
+        alt="Aplikacja SPF na twarz"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">01</span>
+        <span class="tip-tag">Ochrona przeciwsłoneczna</span>
+        <h2 class="tip-title">SPF to obowiązek — nawet zimą i w pochmurne dni</h2>
+        <p class="tip-text">Promieniowanie UVA przenika przez chmury i szyby przez cały rok, prowadząc do fotostarzenia skóry i zwiększając ryzyko nowotworów skóry. Dermatolodzy rekomendują krem z SPF 30–50 jako ostatni krok porannej rutyny, niezależnie od pory roku.</p>
+        <div class="tip-highlight">Wybieraj filtry z szerokim spektrum (UVA + UVB) i aplikuj 20 min przed wyjściem z domu.</div>
+      </div>
+    </article>
+
+    <!-- TIP 2 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=700&auto=format&fit=crop&q=80"
+        alt="Nawilżanie skóry — krem"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">02</span>
+        <span class="tip-tag">Nawilżenie</span>
+        <h3 class="tip-title">Nawilżaj skórę od środka — woda to Twój najlepszy kosmetyk</h3>
+        <p class="tip-text">8 szklanek wody dziennie poprawia elastyczność, zmniejsza widoczność zmarszczek i przyspiesza regenerację skóry. Uzupełnij nawilżanie kremem z kwasem hialuronowym nałożonym na lekko wilgotną skórę — wiąże wodę trzy razy skuteczniej.</p>
+      </div>
+    </article>
+
+    <!-- TIP 3 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=700&auto=format&fit=crop&q=80"
+        alt="Złuszczanie skóry twarzy"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">03</span>
+        <span class="tip-tag">Eksfoliacja</span>
+        <h3 class="tip-title">Złuszczaj, ale z głową — 2 razy w tygodniu wystarczy</h3>
+        <p class="tip-text">Nadmierne złuszczanie niszczy barierę lipidową skóry. Kwasy AHA (glikolowy, mlekowy) pracują na powierzchni, BHA (salicylowy) wnikają w pory — dobierz według potrzeb. Nigdy nie łącz peelingu z retinolem tego samego wieczoru.</p>
+      </div>
+    </article>
+
+    <!-- TIP 4 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=700&auto=format&fit=crop&q=80"
+        alt="Retinol — pielęgnacja skóry"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">04</span>
+        <span class="tip-tag">Retinol</span>
+        <h3 class="tip-title">Retinol: złoty standard anti-aging — zacznij od niskich stężeń</h3>
+        <p class="tip-text">Retinol (witamina A) stymuluje produkcję kolagenu i przyspiesza odnowę komórkową. Zacznij od 0,025–0,05% aplikowanego 2–3x/tydzień wieczorem. Stopniowo zwiększaj częstotliwość — „retinol uglies" na początku to normalny etap przyzwyczajania skóry.</p>
+        <div class="tip-highlight">Zawsze aplikuj rano krem z SPF, gdy używasz retinolu — zwiększa on wrażliwość na UV.</div>
+      </div>
+    </article>
+
+    <!-- TIP 5 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=700&auto=format&fit=crop&q=80"
+        alt="Oczyszczanie twarzy podwójne"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">05</span>
+        <span class="tip-tag">Oczyszczanie</span>
+        <h3 class="tip-title">Double cleansing wieczorem — kluczowy rytuał dla zdrowej cery</h3>
+        <p class="tip-text">Krok 1: olejek lub balsam rozpuszcza makijaż i sebum. Krok 2: łagodny żel lub pianka usuwa reszty i impurities. Podwójne oczyszczanie sprawia, że kolejne kroki pielęgnacji wnikają nawet 40% głębiej. Nikdy nie chodź spać z makijażem!</p>
+      </div>
+    </article>
+
+    <!-- TIP 6 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=700&auto=format&fit=crop&q=80"
+        alt="Witamina C serum"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">06</span>
+        <span class="tip-tag">Antyoksydanty</span>
+        <h3 class="tip-title">Witamina C rano — tarcza ochronna dla Twojej skóry</h3>
+        <p class="tip-text">Serum z witaminą C (10–20% L-askorbinowy) neutralizuje wolne rodniki, rozjaśnia przebarwienia i wzmacnia efekt filtrów UV. Przechowuj w ciemnym miejscu — utlenia się szybko. Żółty kolor to znak, że straciło aktywność.</p>
+      </div>
+    </article>
+
+    <!-- TIP 7 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=700&auto=format&fit=crop&q=80"
+        alt="Podkładka jedwabna do spania"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">07</span>
+        <span class="tip-tag">Sen & regeneracja</span>
+        <h3 class="tip-title">Jedwabna poszewka i sen na wznak — mniej zmarszczek z mechaniki</h3>
+        <p class="tip-text">Spanie twarzą w poduszkę przez lata tworzy tzw. zmarszczki snu. Jedwab i satyna generują mniejsze tarcie, redukując zagniecenia skóry i łamliwość włosów. Sen 7–9h to czas, gdy skóra intensywnie się naprawia — nie skracaj go.</p>
+      </div>
+    </article>
+
+    <!-- TIP 8 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=700&auto=format&fit=crop&q=80"
+        alt="Masaż twarzy gua sha"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">08</span>
+        <span class="tip-tag">Masaż & limfa</span>
+        <h3 class="tip-title">Gua sha i roller — drenaż limfatyczny, który naprawdę działa</h3>
+        <p class="tip-text">5-minutowy masaż twarzą gua sha poprawia mikrokrążenie, zmniejsza opuchliznę i nadaje skórze blask. Pracuj zawsze od centrum twarzy na zewnątrz i w górę. Stosuj z olejkiem — nigdy na suchej skórze, by nie podrażnić naczyń.</p>
+      </div>
+    </article>
+
+    <!-- TIP 9 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&auto=format&fit=crop&q=80"
+        alt="Zdrowe jedzenie dieta skóra"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">09</span>
+        <span class="tip-tag">Dieta & skóra</span>
+        <h3 class="tip-title">Jesz swoją skórę — omega-3, cynk i kolagen w diecie</h3>
+        <p class="tip-text">Łosoś, orzechy włoskie i siemię lniane dostarczają kwasów omega-3, które wzmacniają barierę lipidową skóry. Cynk z pestek dyni reguluje produkcję sebum. Witamina C z papryki wspomaga syntezę kolagenu — piękna skóra zaczyna się na talerzu.</p>
+        <div class="tip-highlight">Ogranicz cukier prosty — powoduje glikację kolagenu i przyspiesza starzenie.</div>
+      </div>
+    </article>
+
+    <!-- TIP 10 -->
+    <article class="tip-card">
+      <img
+        src="https://images.unsplash.com/photo-1541199249251-f713e6145474?w=700&auto=format&fit=crop&q=80"
+        alt="Probiotyki do skóry — microbiome"
+        class="tip-image"
+        loading="lazy"
+      >
+      <div class="tip-body">
+        <span class="tip-number">10</span>
+        <span class="tip-tag">Mikrobiom</span>
+        <h3 class="tip-title">Zadbaj o mikrobiom skóry — prebiotyki i probiotyki w kosmetykach</h3>
+        <p class="tip-text">Skóra ma swój ekosystem miliardów bakterii chroniących przed patogenami i stanem zapalnym. Agresywne mydła i antybakteryjne żele niszczą tę barierę. Szukaj kosmetyków z prebiotykami (inulina, beta-glukan) i probiotykami — trend 2025, który ma solidne dowody naukowe.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- QUOTE BREAK -->
+  <section class="quote-break" id="cytaty">
+    <blockquote>
+      „Pielęgnacja skóry to akt miłości własnej.<br>Twoja skóra pamięta każdą chwilę uwagi."
+    </blockquote>
+    <cite>— Dermatologia & Beauty · LUMIÈRE 2025</cite>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo">LUMIÈRE</a>
+    <p>© 2025 LUMIÈRE Beauty · Porady oparte na wiedzy dermatologicznej</p>
+    <p>Konsultuj zmiany skórne z dermatologiem</p>
+  </footer>
+
+</body>
+</html>
